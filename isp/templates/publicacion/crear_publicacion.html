@@ -1,0 +1,65 @@
+<!-- crear_publicacion.html -->
+{% extends "base.html" %}
+
+{% block title %}
+Crear Publicación
+{% endblock title %}
+
+{% block content %}
+<section>
+    <div class="container" style="color: #ffffff;">
+        <h1 class="mt-5"><strong>Crear Publicación</strong></h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="nombre_usuario" class="form-label">Nombre de Usuario</label>
+                <input type="text" id="nombre_usuario" class="form-control bg-dark text-light" value="{{ request.user.username }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.profesor.id_for_label }}" class="form-label">{{ form.profesor.label }}</label>
+                {{ form.profesor }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.materia.id_for_label }}" class="form-label">{{ form.materia.label }}</label>
+                {{ form.materia }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.titulo.id_for_label }}" class="form-label">{{ form.titulo.label }}</label>
+                {{ form.titulo }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.fecha.id_for_label }}" class="form-label">{{ form.fecha.label }}</label>
+                {{ form.fecha }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.comentario.id_for_label }}" class="form-label">{{ form.comentario.label }}</label>
+                {{ form.comentario }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.dominio.id_for_label }}" class="form-label">{{ form.dominio.label }}</label>
+                {{ form.dominio }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.puntualidad.id_for_label }}" class="form-label">{{ form.puntualidad.label }}</label>
+                {{ form.puntualidad }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.asistencia.id_for_label }}" class="form-label">{{ form.asistencia.label }}</label>
+                {{ form.asistencia }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.dificultad.id_for_label }}" class="form-label">{{ form.dificultad.label }}</label>
+                {{ form.dificultad }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.seguimiento.id_for_label }}" class="form-label">{{ form.seguimiento.label }}</label>
+                {{ form.seguimiento }}
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-primary mb-5" style="background-color: #333333; border-color: #333333;">Enviar</button>
+                <button type="reset" class="btn btn-secondary mb-5">Reiniciar</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock content %}

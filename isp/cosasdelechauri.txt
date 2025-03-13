@@ -1,0 +1,91 @@
+publicacion/views.py
+
+from django.views import generic
+from .models import Publicacion
+
+# Create your views here.
+class PublicacionView(generic.ListView):
+	template_name = 'publicacion/index.html'
+
+	def get_queryset (self):
+		return Publicacion.objets-order_by('-fecha')[:5]
+
+
+------------------------
+publicacion/urls.py
+
+from django.urls import path
+from . import views
+
+app_name ='publicacion'
+urlpatterns =[
+	path('',views.PublicacionView.as_view(),name='index')
+]
+
+---------------------
+
+wikiprofes/urls.py
+
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('usuario.urls')),
+    path('',include('publicacion.urls')),
+]
+----------------------
+
+templates/publicacion/index.html
+
+{%extends "base.html"%}
+{% block titulo %}
+<title>Publicacion</title>
+{% endblock titulo"%}
+{% block content %}
+	{% for publicacion in publicacion_list %}
+	<section>
+		<div class="container">
+			<div class="card mb-3" style="width: 18rem;">
+			  	<div class="card-body">
+				    <h5 class="card-title">{{publicacion.titulo}}</h5>
+				    <h6 class="card-subtitle mb-2 text-muted">sobre {{publicacion.profesir}}</h6>
+				    <p class="card-text">{{publicacion.comentario}}</p>
+		 		</div>
+		 		<div class ="card-footer text -body-secondary">
+		 			Por {{publicacion.usuario}}.{{publicacion.fecha}}
+		 		</div>
+		 	</div>
+		</div>
+	</section>
+	{% endfor %}
+{% endblock content %}
+
+
+---------------------------
+
+templates/index.html
+
+{% extends "base.html" %}
+{% block titulo %}
+<title>Publicacion</title>
+{% endblock titulo %}
+{% block content %}
+    {% for publicacion in publicacion_list %}
+    <section>
+        <div class="container">
+            <div class="card mb-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ publicacion.titulo }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">sobre {{ publicacion.profesor }}</h6>
+                    <p class="card-text">{{ publicacion.comentario }}</p>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    Por {{ publicacion.usuario }}. {{ publicacion.fecha }}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+{% endblock content %}

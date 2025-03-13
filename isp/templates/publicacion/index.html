@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block titulo %}
+<title>Publicaciones</title>
+{% endblock titulo %}
+{% block content %}
+<section class="container">
+    <div class="row mt-5">
+        {% for publicacion in publicacion_list %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body bg-dark">
+                    <h4 class="card-title text-light">{{ publicacion.titulo }}</h4>
+                    <h5 class="card-text text-light">{{ publicacion.materia }}</h5>
+                    <h6 class="card-subtitle mb-2 text-white">Sobre <a  style="text-decoration: none;" href="{% url 'publicacion:profesor' publicacion.profesor.id %}">{{ publicacion.profesor }}</a></h6>
+                    <p class="card-text text-light">{{ publicacion.comentario }}</p>
+                </div>
+                <div class="card-footer text-end bg-dark text-light border border-light">
+                    Por {{ publicacion.usuario }}. {{ publicacion.fecha }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}
