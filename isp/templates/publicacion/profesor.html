@@ -1,61 +1,96 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-<title> {{ profesor }}</title>
+<title>{{ profesor }}</title>
 {% endblock titulo %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4 text-light"> {{ profesor }}</h2>
-    
+    <h2 class="mb-4 text-light text-center">{{ profesor }}</h2>
+
     <div class="row">
+        <!-- Información lateral -->
         <div class="col-md-4">
             <section>
-                <div class="card mb-4 bg-dark">
-                    <div class="card-header bg-primary text-white bg-dark border border-light">
-                        <h4 class="mb-0">Calificación General: {{ calificacion_general|floatformat:2 }}</h4>
+                <div class="card mb-4 bg-dark border border-light">
+                    <div class="card-header bg-dark text-white border-bottom border-light">
+                        <strong>Información del profesor</strong>
                     </div>
                     <ul class="list-group list-group-flush text-start">
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
-                            <span><strong>Dominio</strong></span> 
-                            <span class="badge bg-secondary rounded-pill">{{ promedio_dominio|floatformat:2 }}</span>
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
+                            <span><strong>Estilo de enseñanza</strong></span>
+                            <span class="badge bg-secondary rounded-pill">
+                                {{ profesor.get_metodo_ensenanza_display }}
+                            </span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
+                            <span><strong>Calificación general</strong></span>
+                            <span class="badge bg-primary rounded-pill">
+                                {{ calificacion_general|floatformat:2 }}
+                            </span>
+                        </li>
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
+                            <span><strong>Dominio</strong></span>
+                            <span class="badge bg-secondary rounded-pill">
+                                {{ promedio_dominio|floatformat:2 }}
+                            </span>
+                        </li>
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
                             <span><strong>Puntualidad</strong></span>
-                            <span class="badge bg-secondary rounded-pill">{{ promedio_puntualidad|floatformat:2 }}</span>
+                            <span class="badge bg-secondary rounded-pill">
+                                {{ promedio_puntualidad|floatformat:2 }}
+                            </span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
                             <span><strong>Asistencia</strong></span>
-                            <span class="badge bg-secondary rounded-pill">{{ promedio_asistencia|floatformat:2 }}</span>
+                            <span class="badge bg-secondary rounded-pill">
+                                {{ promedio_asistencia|floatformat:2 }}
+                            </span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
-                            <span><strong>Dificultad</strong></span>
-                            <span class="badge bg-secondary rounded-pill">{{ promedio_dificultad|floatformat:2 }}</span>
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
+                            <span><strong>Facilidad</strong></span>
+                            <span class="badge bg-secondary rounded-pill">
+                                {{ promedio_facilidad|floatformat:2 }}
+                            </span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
                             <span><strong>Seguimiento</strong></span>
-                            <span class="badge bg-secondary rounded-pill">{{ promedio_seguimiento|floatformat:2 }}</span>
+                            <span class="badge bg-secondary rounded-pill">
+                                {{ promedio_seguimiento|floatformat:2 }}
+                            </span>
                         </li>
                     </ul>
                 </div>
             </section>
         </div>
 
+        <!-- Publicaciones -->
         <div class="col-md-8">
-            {% for publicacion in publicacion_list %}
-            <section>
-                <div class="card mb-4 bg-dark">
-                    <div class="card-body">
-                        <h5 class="card-title text-light">{{ publicacion.titulo }}</h5>
-                        <h6 class="card-text text-light">{{ publicacion.materia }}</h6>
-                        <p class="card-text text-light">{{ publicacion.comentario }}</p>
+            {% if publicacion_list %}
+                {% for publicacion in publicacion_list %}
+                <section>
+                    <div class="card mb-4 bg-dark border border-light">
+                        <div class="card-body">
+                            <h5 class="card-title text-light">{{ publicacion.titulo }}</h5>
+                            <h6 class="text-info">{{ publicacion.materia }}</h6>
+                            <p class="card-text text-light">{{ publicacion.comentario }}</p>
+                        </div>
+                        <div class="card-footer text-light text-end bg-dark border-top border-light">
+                            Por {{ publicacion.usuario.username }}
+                            {% if publicacion.usuario.metodo_aprendizaje %}
+                                (<span class="text-info">{{ publicacion.usuario.get_metodo_aprendizaje_display }}</span>)
+                            {% endif %}
+                            <br>
+                            {{ publicacion.fecha }}
+                        </div>
                     </div>
-                    <div class="card-footer text-muted text-end bg-dark">
-                        Por {{ publicacion.usuario }}. {{ publicacion.fecha }}
-                    </div>
+                </section>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-warning text-center bg-dark text-light border border-light" role="alert">
+                    Aún no hay publicaciones sobre este profesor.
                 </div>
-            </section>
-            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>

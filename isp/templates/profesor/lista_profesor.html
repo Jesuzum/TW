@@ -1,32 +1,57 @@
-{% extends "base.html" %}
-{% block titulo %}
+{% extends "base.html" %} {% block titulo %}
 <title>Profesores</title>
-{% endblock titulo %}
-{% block search %}
+{% endblock titulo %} {% block search %}
 <form class="d-flex me-2" role="search" method="get" action="">
-  <input class="form-control me-2 bg-dark text-light" type="search" name="q" placeholder="Buscar" aria-label="Search" value="{{ request.GET.q }}">
-  <button class="btn btn-outline-light" type="submit" style="border-color: #ffffff;">Buscar</button>
+  <input
+    class="form-control me-2 bg-dark text-light"
+    type="search"
+    name="q"
+    placeholder="Buscar"
+    aria-label="Search"
+    value="{{ request.GET.q }}"
+  />
+  <button
+    class="btn btn-outline-light"
+    type="submit"
+    style="border-color: #ffffff"
+  >
+    Buscar
+  </button>
 </form>
-{% endblock search %}
-{% block content %} 
+{% endblock search %} {% block content %}
 <section class="container mt-4">
-    {% if profesor_list %}
-    <div class="list-group bg-dark">
-      <div class="list-group-item active bg-dark border border-light">
-          <div class="row text-center">
-              <div class="col text-light"><strong>PROFESORES</strong></div>
-          </div>
+  {% if profesor_list %}
+  <div class="list-group bg-dark">
+    <div class="list-group-item active bg-dark border border-light">
+      <div class="row text-center">
+        <div class="col text-light"><strong>PROFESOR</strong></div>
+        <div class="col text-light">
+          <strong>ESTILO DE APRENDIZAJE ASOCIADO</strong>
+        </div>
       </div>
-      {% for profesor in profesor_list %}
-      <a href="{% url 'publicacion:profesor' profesor.id %}" class="list-group-item list-group-item-action bg-dark text-light">
-          {{ profesor.nombre }}
-      </a>
-      {% endfor %}
-    </div>  
-    {% else %}
-    <div class="alert alert-warning text-center bg-dark text-light border border-dark" role="alert">
-      Profesor no encontrado.
     </div>
-    {% endif %}
+    {% for profesor in profesor_list %}
+    <a
+      href="{% url 'publicacion:profesor' profesor.id %}"
+      class="list-group-item list-group-item-action bg-dark"
+    >
+      <div class="row text-center">
+        <div class="col text-light">{{ profesor.nombre }}</div>
+        <div class="col text-light">
+          <span class="badge bg-secondary rounded-pill"
+            >{{ profesor.get_metodo_ensenanza_display }}</span
+          >
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div
+    class="alert alert-warning text-center bg-dark text-light border border-dark"
+    role="alert">
+    Profesor no encontrado.
+  </div>
+  {% endif %}
 </section>
 {% endblock content %}

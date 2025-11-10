@@ -1,65 +1,145 @@
-<!-- crear_publicacion.html -->
 {% extends "base.html" %}
 
-{% block title %}
-Crear Publicación
-{% endblock title %}
+{% block titulo %}
+<title>Crear Publicación</title>
+{% endblock titulo %}
 
 {% block content %}
-<section>
-    <div class="container" style="color: #ffffff;">
-        <h1 class="mt-5"><strong>Crear Publicación</strong></h1>
-        <form method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="nombre_usuario" class="form-label">Nombre de Usuario</label>
-                <input type="text" id="nombre_usuario" class="form-control bg-dark text-light" value="{{ request.user.username }}" disabled>
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.profesor.id_for_label }}" class="form-label">{{ form.profesor.label }}</label>
-                {{ form.profesor }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.materia.id_for_label }}" class="form-label">{{ form.materia.label }}</label>
-                {{ form.materia }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.titulo.id_for_label }}" class="form-label">{{ form.titulo.label }}</label>
-                {{ form.titulo }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.fecha.id_for_label }}" class="form-label">{{ form.fecha.label }}</label>
-                {{ form.fecha }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.comentario.id_for_label }}" class="form-label">{{ form.comentario.label }}</label>
-                {{ form.comentario }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.dominio.id_for_label }}" class="form-label">{{ form.dominio.label }}</label>
-                {{ form.dominio }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.puntualidad.id_for_label }}" class="form-label">{{ form.puntualidad.label }}</label>
-                {{ form.puntualidad }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.asistencia.id_for_label }}" class="form-label">{{ form.asistencia.label }}</label>
-                {{ form.asistencia }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.dificultad.id_for_label }}" class="form-label">{{ form.dificultad.label }}</label>
-                {{ form.dificultad }}
-            </div>
-            <div class="mb-3">
-                <label for="{{ form.seguimiento.id_for_label }}" class="form-label">{{ form.seguimiento.label }}</label>
-                {{ form.seguimiento }}
-            </div>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="submit" class="btn btn-primary mb-5" style="background-color: #333333; border-color: #333333;">Enviar</button>
-                <button type="reset" class="btn btn-secondary mb-5">Reiniciar</button>
-            </div>
-        </form>
+<div class="container mt-5">
+    <div class="card bg-dark border border-light shadow">
+        <div class="card-header bg-dark border-bottom border-light text-center">
+            <h3 class="text-light mb-0">Crear Nueva Publicación</h3>
+        </div>
+
+        <div class="card-body text-light">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Datos del usuario -->
+                <div class="mb-4">
+                    <label class="form-label"><strong>Nombre de Usuario</strong></label>
+                    <input type="text" class="form-control bg-dark text-light border-secondary" 
+                           value="{{ request.user.username }}" disabled>
+                </div>
+
+                <!-- Selección de profesor y materia -->
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="{{ form.profesor.id_for_label }}" class="form-label"><strong>{{ form.profesor.label }}</strong></label>
+                        {{ form.profesor }}
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="{{ form.materia.id_for_label }}" class="form-label"><strong>{{ form.materia.label }}</strong></label>
+                        {{ form.materia }}
+                    </div>
+                </div>
+
+                <!-- Título y Fecha -->
+                <div class="row">
+                    <div class="col-md-8 mb-4">
+                        <label for="{{ form.titulo.id_for_label }}" class="form-label"><strong>{{ form.titulo.label }}</strong></label>
+                        {{ form.titulo }}
+                    </div>
+                    <div class="col-md-4 mb-4" style="display:none;">
+                        <label for="{{ form.fecha.id_for_label }}" class="form-label"><strong>{{ form.fecha.label }}</strong></label>
+                        {{ form.fecha }}
+                    </div>
+
+                    <script>
+                        // Establecer la fecha actual en el campo oculto al cargar la página
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const fechaInput = document.getElementById('{{ form.fecha.id_for_label }}');
+                            const today = new Date().toISOString().split('T')[0];
+                            fechaInput.value = today;
+                        });
+                    </script>
+                </div>
+
+                <!-- Comentario -->
+                <div class="mb-4">
+                    <label for="{{ form.comentario.id_for_label }}" class="form-label"><strong>{{ form.comentario.label }}</strong></label>
+                    {{ form.comentario }}
+                </div>
+
+                <!-- Evaluación -->
+                <h5 class="border-bottom border-secondary pb-2 mb-3">Califica a tu Profesor en escalas del 1 al 10</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.dominio.id_for_label }}" class="form-label"><strong>{{ form.dominio.label }}</strong></label>
+                        {{ form.dominio }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.puntualidad.id_for_label }}" class="form-label"><strong>{{ form.puntualidad.label }}</strong></label>
+                        {{ form.puntualidad }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.asistencia.id_for_label }}" class="form-label"><strong>{{ form.asistencia.label }}</strong></label>
+                        {{ form.asistencia }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ form.facilidad.id_for_label }}" class="form-label"><strong>{{ form.facilidad.label }}</strong></label>
+                        {{ form.facilidad }}
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="{{ form.seguimiento.id_for_label }}" class="form-label"><strong>{{ form.seguimiento.label }}</strong></label>
+                        {{ form.seguimiento }}
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button type="reset" class="btn btn-outline-light">
+                        <i class="bi bi-arrow-counterclockwise"></i> Reiniciar
+                    </button>
+                    <button type="submit" class="btn btn-primary" style="background-color: #333333; border-color: #333333;">
+                        <i class="bi bi-send-fill"></i> Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</section>
+</div>
+
+<!-- 💅 Estilos para campos en modo oscuro -->
+<style>
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    textarea {
+        background-color: #212529 !important; /* fondo oscuro */
+        color: #f8f9fa !important; /* texto claro */
+        border: 1px solid #6c757d !important; /* borde gris */
+        border-radius: 0.375rem;
+        padding: 0.5rem;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none !important;
+        border-color: #adb5bd !important;
+        box-shadow: 0 0 0 0.2rem rgba(173, 181, 189, 0.25);
+    }
+
+    /* Placeholders claros */
+    ::placeholder {
+        color: #adb5bd !important;
+    }
+
+    /* Deshabilitados (como el nombre de usuario) */
+    input:disabled {
+        background-color: #343a40 !important;
+        color: #ced4da !important;
+    }
+ 
+    /* Scroll suave en textareas */
+    textarea {
+        resize: vertical;
+    }
+</style>
 {% endblock content %}

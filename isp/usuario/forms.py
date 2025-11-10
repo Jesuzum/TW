@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 Usuario = get_user_model()
 
 class RegistroForm(forms.Form):
-    nombre_usuario = forms.CharField(max_length=20)
+    nombre_usuario = forms.CharField(max_length=70)
     correo = forms.EmailField()
     contra = forms.CharField()
     confirmacion = forms.CharField()

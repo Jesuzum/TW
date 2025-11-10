@@ -10,7 +10,7 @@ class PublicacionView(generic.ListView):
     template_name = 'publicacion/index.html'
 
     def get_queryset(self):
-        return Publicacion.objects.order_by('-fecha')[:6]
+        return Publicacion.objects.order_by('-fecha')
     
 class ProfesorView(generic.ListView):
     template_name = 'publicacion/profesor.html'
@@ -28,7 +28,7 @@ class ProfesorView(generic.ListView):
             promedio_dominio=Avg('dominio'),
             promedio_puntualidad=Avg('puntualidad'),
             promedio_asistencia=Avg('asistencia'),
-            promedio_dificultad=Avg('dificultad'),
+            promedio_facilidad=Avg('facilidad'),
             promedio_seguimiento=Avg('seguimiento')
         )
 
@@ -37,7 +37,7 @@ class ProfesorView(generic.ListView):
                 promedios['promedio_dominio'] +
                 promedios['promedio_puntualidad'] +
                 promedios['promedio_asistencia'] +
-                promedios['promedio_dificultad'] +
+                promedios['promedio_facilidad'] +
                 promedios['promedio_seguimiento']
             ) / 5
         else:
@@ -47,7 +47,7 @@ class ProfesorView(generic.ListView):
         context['promedio_dominio'] = promedios['promedio_dominio']
         context['promedio_puntualidad'] = promedios['promedio_puntualidad']
         context['promedio_asistencia'] = promedios['promedio_asistencia']
-        context['promedio_dificultad'] = promedios['promedio_dificultad']
+        context['promedio_facilidad'] = promedios['promedio_facilidad']
         context['promedio_seguimiento'] = promedios['promedio_seguimiento']
         context['calificacion_general'] = calificacion_general
 

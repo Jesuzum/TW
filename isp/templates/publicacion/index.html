@@ -6,16 +6,27 @@
 <section class="container">
     <div class="row mt-5">
         {% for publicacion in publicacion_list %}
-        <div class="col-lg-6 mb-4">
+        <div class="col-12 mb-4"> <!-- Cambiado a col-12 para una publicacion por fila -->
             <div class="card">
                 <div class="card-body bg-dark">
                     <h4 class="card-title text-light">{{ publicacion.titulo }}</h4>
                     <h5 class="card-text text-light">{{ publicacion.materia }}</h5>
-                    <h6 class="card-subtitle mb-2 text-white">Sobre <a  style="text-decoration: none;" href="{% url 'publicacion:profesor' publicacion.profesor.id %}">{{ publicacion.profesor }}</a></h6>
+                    <h6 class="card-subtitle mb-2 text-white">
+                        Sobre <a style="text-decoration: none;" href="{% url 'publicacion:profesor' publicacion.profesor.id %}">{{ publicacion.profesor }}</a>
+                    </h6>
                     <p class="card-text text-light">{{ publicacion.comentario }}</p>
                 </div>
                 <div class="card-footer text-end bg-dark text-light border border-light">
-                    Por {{ publicacion.usuario }}. {{ publicacion.fecha }}
+                    Por {{ publicacion.usuario.username }}
+                    {% if publicacion.usuario.metodo_aprendizaje %}
+                        (<span class="text-info">{{ publicacion.usuario.get_metodo_aprendizaje_display }}</span>)
+                    {% endif %}
+                    — Profesor: {{ publicacion.profesor.nombre }}
+                    {% if publicacion.profesor.metodo_ensenanza %}
+                        (<span class="text-warning">{{ publicacion.profesor.get_metodo_ensenanza_display }}</span>)
+                    {% endif %}
+                    <br>
+                    {{ publicacion.fecha }}
                 </div>
             </div>
         </div>

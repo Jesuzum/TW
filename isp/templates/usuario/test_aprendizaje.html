@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}
+Test de Aprendizaje
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card bg-dark border border-light shadow">
+        <div class="card-header bg-dark border-bottom border-light text-center">
+            <h3 class="text-light mb-0">Descubre tu estilo de aprendizaje</h3>
+        </div>
+
+        <div class="card-body text-light">
+            <form method="post">
+                {% csrf_token %}
+                {% for pregunta in preguntas %}
+                    <div class="mb-4">
+                        <p class="mb-2"><strong>{{ forloop.counter }}. {{ pregunta.pregunta }}</strong></p>
+                        <div class="ms-3">
+                            {% for clave, texto in pregunta.opciones.items %}
+                                <div class="form-check">
+                                    <input 
+                                        class="form-check-input bg-dark border-secondary" 
+                                        type="radio" 
+                                        name="pregunta_{{ forloop.parentloop.counter0 }}" 
+                                        value="{{ clave }}" 
+                                        id="pregunta_{{ forloop.parentloop.counter0 }}_{{ clave }}" 
+                                        required
+                                    >
+                                    <label class="form-check-label text-light" for="pregunta_{{ forloop.parentloop.counter0 }}_{{ clave }}">
+                                        {{ texto }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn px-3 text-white"
+                        style="background-color: #0d6efd; border: 1px solid #0d6efd; transition: 0.3s;">
+                  <i class="bi bi-check-circle"></i> Finalizar Test
+                </button>
+
+                <style>
+                button:hover {
+                  background-color: #333333 !important;
+                  border-color: #333333 !important;
+                }
+                </style>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 0.75rem;
+    }
+
+    .card-header h3 {
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .form-check-input {
+        cursor: pointer;
+    }
+
+    .form-check-input:checked {
+        background-color: #0d6efd !important;
+        border-color: #0d6efd !important;
+    }
+
+    .form-check-label {
+        margin-left: 0.3rem;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #444 !important;
+        border-color: #444 !important;
+    }
+
+    .card-body {
+        background-color: #1e1e1e !important;
+        border-radius: 0 0 0.75rem 0.75rem;
+    }
+</style>
+{% endblock content %}

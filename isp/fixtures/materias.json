@@ -1,0 +1,22 @@
+[
+  {"model": "materia.materia", "pk": 1, "fields": {"clave": "IS101", "nombre": "Introducción a la Ingeniería de Software", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 2, "fields": {"clave": "IS102", "nombre": "Programación Orientada a Objetos", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 3, "fields": {"clave": "IS103", "nombre": "Estructuras de Datos", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 4, "fields": {"clave": "IS104", "nombre": "Bases de Datos", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 5, "fields": {"clave": "IS105", "nombre": "Sistemas Operativos", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 6, "fields": {"clave": "IS106", "nombre": "Ingeniería de Requisitos", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 7, "fields": {"clave": "IS107", "nombre": "Diseño de Software", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 8, "fields": {"clave": "IS108", "nombre": "Pruebas de Software", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 9, "fields": {"clave": "IS109", "nombre": "Arquitectura de Software", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 10, "fields": {"clave": "IS110", "nombre": "Gestión de Proyectos de Software", "departamento": "Ciencias Computacionales"}},
+  {"model": "materia.materia", "pk": 11, "fields": {"clave": "IC201", "nombre": "Redes de Computadoras", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 12, "fields": {"clave": "IC202", "nombre": "Sistemas Embebidos", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 13, "fields": {"clave": "IC203", "nombre": "Compiladores", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 14, "fields": {"clave": "IC204", "nombre": "Inteligencia Artificial", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 15, "fields": {"clave": "IC205", "nombre": "Seguridad Informática", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 16, "fields": {"clave": "IC206", "nombre": "Computación en la Nube", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 17, "fields": {"clave": "IC207", "nombre": "Minería de Datos", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 18, "fields": {"clave": "IC208", "nombre": "Aprendizaje Automático", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 19, "fields": {"clave": "IC209", "nombre": "Computación Paralela", "departamento": "Ingeniería en Computación"}},
+  {"model": "materia.materia", "pk": 20, "fields": {"clave": "IC210", "nombre": "Desarrollo Móvil", "departamento": "Ingeniería en Computación"}}
+]

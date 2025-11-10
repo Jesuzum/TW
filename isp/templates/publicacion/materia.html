@@ -6,46 +6,61 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">{{ materia.nombre }}</h2>
-    
+    <h2 class="mb-4 text-light text-center">{{ materia.nombre }}</h2>
+
     <div class="row">
+        <!-- Información lateral de la materia -->
         <div class="col-md-4">
             <section>
-                <div class="card mb-4 bg-dark">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center bg-dark border border-light">
-                        <span><strong>Materia</strong></span>
-                        <span>{{ materia.nombre }}</span>
+                <div class="card mb-4 bg-dark border border-light">
+                    <div class="card-header bg-dark text-white border-bottom border-light">
+                        <strong>Información de la materia</strong>
                     </div>
                     <ul class="list-group list-group-flush text-start">
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
-                            <span><strong>Clave</strong></span> 
-                            <span class="badge bg-secondary rounded-pill">{{ materia.clave }}</span>
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
+                            <span><strong>Clave:</strong></span> 
+                            <span>{{ materia.clave }}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
-                            <span><strong>Departamento</strong></span>
-                            <span class=" ">{{ materia.departamento }}</span>
+                        <li class="list-group-item bg-dark text-light d-flex justify-content-between">
+                            <span><strong>Departamento:</strong></span>
+                            <span>{{ materia.departamento }}</span>
                         </li>
                     </ul>
                 </div>
             </section>
         </div>
 
-
+        <!-- Publicaciones relacionadas -->
         <div class="col-md-8">
-            {% for publicacion in publicacion_list %}
-            <section>
-                <div class="card mb-4 bg-dark">
-                    <div class="card-body">
-                        <h5 class="card-title text-light">{{ publicacion.titulo }}</h5>
-                        <h6 class="card-text text-light">{{ publicacion.profesor }}</h6>
-                        <p class="card-text text-light">{{ publicacion.comentario }}</p>
+            {% if publicacion_list %}
+                {% for publicacion in publicacion_list %}
+                <section>
+                    <div class="card mb-4 bg-dark border border-light">
+                        <div class="card-body">
+                            <h5 class="card-title text-light">{{ publicacion.titulo }}</h5>
+                            <h6 class="text-info">{{ publicacion.profesor.nombre }}</h6>
+                            <p class="card-text text-light">{{ publicacion.comentario }}</p>
+                        </div>
+                        <div class="card-footer text-light text-end bg-dark border-top border-light">
+                            Por {{ publicacion.usuario.username }}
+                            {% if publicacion.usuario.metodo_aprendizaje %}
+                                (<span class="text-info">{{ publicacion.usuario.get_metodo_aprendizaje_display }}</span>)
+                            {% endif %}
+                            — Profesor: {{ publicacion.profesor.nombre }}
+                            {% if publicacion.profesor.metodo_ensenanza %}
+                                (<span class="text-warning">{{ publicacion.profesor.get_metodo_ensenanza_display }}</span>)
+                            {% endif %}
+                            <br>
+                            {{ publicacion.fecha }}
+                        </div>
                     </div>
-                    <div class="card-footer text-muted text-end bg-dark">
-                        Por {{ publicacion.usuario }}. {{ publicacion.fecha }}
-                    </div>
+                </section>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-warning text-center bg-dark text-light border border-light" role="alert">
+                    No hay publicaciones para esta materia aún.
                 </div>
-            </section>
-            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>

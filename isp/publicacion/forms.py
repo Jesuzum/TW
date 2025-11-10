@@ -19,7 +19,7 @@ class PublicacionForm(forms.ModelForm):
     )
     dominio = forms.ChoiceField(
         choices=[(i, i) for i in range(1, 11)], 
-        label="Dominio",
+        label="Dominio del tema",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     puntualidad = forms.ChoiceField(
@@ -32,20 +32,20 @@ class PublicacionForm(forms.ModelForm):
         label="Asistencia",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    dificultad = forms.ChoiceField(
+    facilidad = forms.ChoiceField(
         choices=[(i, i) for i in range(1, 11)], 
-        label="Dificultad",
+        label="Facilidad de aprendizaje",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     seguimiento = forms.ChoiceField(
         choices=[(i, i) for i in range(1, 11)], 
-        label="Seguimiento",
+        label="Seguimiento al alumno",
         widget=forms.Select(attrs={'class': 'form-control'})
     )
 
     class Meta:
         model = Publicacion
-        fields = ['profesor', 'materia', 'titulo', 'fecha', 'comentario', 'dominio', 'puntualidad', 'asistencia', 'dificultad', 'seguimiento']
+        fields = ['profesor', 'materia', 'titulo', 'fecha', 'comentario', 'dominio', 'puntualidad', 'asistencia', 'facilidad', 'seguimiento']
         widgets = {
             'profesor': forms.Select(attrs={'class': 'form-control'}),
             'materia': forms.Select(attrs={'class': 'form-control'}),
